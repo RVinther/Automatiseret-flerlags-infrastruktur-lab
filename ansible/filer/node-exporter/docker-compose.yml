@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  node_exporter:
+    image: prom/node-exporter:latest
+    container_name: node_exporter
+    restart: always
+    ports:
+      - "9100:9100"
+    networks:
+      - infra_net
+
+networks:
+  infra_net:
+    external: true

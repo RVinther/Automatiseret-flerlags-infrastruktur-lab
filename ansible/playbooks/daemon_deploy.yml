@@ -1,0 +1,16 @@
+- hosts: infra
+  become: true
+
+  tasks:
+
+    - name: Deploy daemon.json til serverne
+      ansible.builtin.copy:
+        src: ../files/daemon.json
+        dest: /etc/docker/daemon.json
+        mode: '0644'
+
+    - name: Genstart Docker for at få den nye konfiguration
+      ansible.builtin.service:
+        name: docker
+        state: restarted
+        enabled: true

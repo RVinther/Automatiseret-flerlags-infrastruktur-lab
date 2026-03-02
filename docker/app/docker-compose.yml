@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  api:
+    build: .
+    container_name: api_service
+    restart: always
+    ports:
+      - "5000:5000"
+    networks:
+      - infra_net
+    environment:
+      DB_HOST: 192.168.56.12
+      DB_USER: appuser
+      DB_PASSWORD: dit_kodeord_her
+      DB_NAME: appdb
+
+networks:
+  infra_net:
+    external: true

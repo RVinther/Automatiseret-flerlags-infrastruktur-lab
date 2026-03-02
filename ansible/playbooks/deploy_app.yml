@@ -1,0 +1,31 @@
+- hosts: app
+  become: true
+
+  tasks:
+
+    - name: Opret mappe til app
+      ansible.builtin.file:
+        path: /opt/app
+        state: directory
+        mode: '0755'
+
+    - name: Kopiér app-filer til serveren
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/../../docker/app/"
+        dest: /opt/app/
+        mode: '0755'
+
+    - name: Sikr at infra_net eksisterer
+      ansible.builtin.command: docker network inspect infra_net
+      register: network_check
+      ignore_errors: true
+      changed_when: false
+
+    - name: Opret infra_net hvis den ikke findes
+      ansible.builtin.command: docker network create infra_net
+      when: network_check.rc != 0
+
+    - name: Start API container
+      ansible.builtin.command: docker compose up -d --build
+      args:
+        chdir: /opt/app

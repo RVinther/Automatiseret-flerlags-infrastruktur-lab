@@ -1,0 +1,31 @@
+- hosts: db
+  become: true
+
+  tasks:
+
+    - name: Opret mappe til DB
+      ansible.builtin.file:
+        path: /opt/db
+        state: directory
+        mode: '0755'
+
+    - name: Kopiér docker-compose til DB
+      ansible.builtin.copy:
+        src: ../../docker/db/docker-compose.yml
+        dest: /opt/db/docker-compose.yml
+        mode: '0644'
+
+    - name: Sikr at infra_net eksisterer
+      ansible.builtin.command: docker network inspect infra_net
+      register: network_check
+      ignore_errors: true
+      changed_when: false
+
+    - name: Opret infra_net hvis den ikke findes
+      ansible.builtin.command: docker network create infra_net
+      when: network_check.rc != 0
+
+    - name: Start PostgreSQL container
+      ansible.builtin.command: docker compose up -d
+      args:
+        chdir: /opt/db

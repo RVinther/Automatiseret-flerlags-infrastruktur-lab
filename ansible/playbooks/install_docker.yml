@@ -1,0 +1,36 @@
+- hosts: infra
+  become: true
+
+  tasks:
+
+    - name: Intallér nødvendige services
+      ansible.builtin.apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+        state: present
+        update_cache: true
+
+    - name: Tilføj docker GPG key
+      ansible.builtin.command: >
+        bash -c "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -"
+      changed_when: false
+
+    - name: Tilføj docker repo
+      ansible.builtin.apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+        state: present
+
+    - name: Installér Docker engine
+      ansible.builtin.apt:
+        name: docker-ce
+        state: present
+        update_cache: true
+
+    - name: Sikr at Docker service kører
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true

@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  worker:
+    image: busybox
+    restart: always
+    command: >
+      sh -c "
+      while true; do
+        wget -q -O- http://192.168.56.10/ > /dev/null;
+        wget -q -O- http://192.168.56.10/db-check > /dev/null;
+        sleep 1;
+      done
+      "
+    networks:
+      - infra_net
+
+networks:
+  infra_net:
+    external: true
