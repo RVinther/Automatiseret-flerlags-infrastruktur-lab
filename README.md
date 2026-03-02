@@ -72,7 +72,7 @@ Målet har også været at skabe et veldokumenteret og containeriseret miljø.
 - [Arkitektur](dokumenter/01_arkitektur.md)
 - [Netværk](dokumenter/02_netværk.md)
 - [Services](dokumenter/03_services.md)
-- [Monitorering](dokumenter/04_logging.md)
+- [Logging](dokumenter/04_logging.md)
 - [Sikkerhed](dokumenter/05_sikkerhed.md)
 - [Automatisering](dokumenter/06_infrastruktur_automation.md)
 - [Genopbygning](dokumenter/07_genopbygning.md)
