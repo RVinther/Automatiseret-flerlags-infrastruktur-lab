@@ -31,7 +31,7 @@ Tildel statiske IP-adresser, så de matcher inventory-filen.
 På din host-maskine, skriv i terminalen:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/RVinther/Automatiseret-flerlags-infrastruktur-lab
 cd automatiseret-flerlags-infrastruktur-lab
 ```
 ## 3. Tilpas inventory
@@ -45,7 +45,7 @@ Sørg for:
 
 ## Kør samlet deployment
 
-Fra repository-roden i terminalen:
+Fra mappen "Automatiseret-flerlags-infrastruktur-lab/" i terminalen:
 
 ```bash
 ansible-playbook -i ansible/inventory/inventory.ini ansible/playbooks/site.yml
