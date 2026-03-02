@@ -32,7 +32,7 @@ På din host-maskine, skriv i terminalen:
 
 ```bash
 git clone https://github.com/RVinther/Automatiseret-flerlags-infrastruktur-lab
-cd automatiseret-flerlags-infrastruktur-lab
+cd Automatiseret-flerlags-infrastruktur-lab
 ```
 ## 3. Tilpas inventory
 
