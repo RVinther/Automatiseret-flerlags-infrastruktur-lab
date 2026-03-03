@@ -63,9 +63,9 @@ Så sker følgende automatisk:
 
 ## Tjek om det virker
 
-- Web (via reverse proxy):  http://<web-ip>
-- Prometheus:               http://<logs-ip>:9090
-- Grafana:                  http://<logs-ip>:3000
+- Web (via reverse proxy):  http://din-web-servers-ip
+- Prometheus:               http://din-log-servers-ip:9090
+- Grafana:                  http://din-log-servers-ip:3000
 
 Grafana-login:
 - Brugernavn: admin
